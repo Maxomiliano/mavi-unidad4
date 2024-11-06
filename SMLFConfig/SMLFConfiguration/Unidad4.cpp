@@ -3,6 +3,8 @@
 #include <iostream>
 #include "Crosshair.h"
 #include "Drag.h"
+#include "Splats.h"
+#include "Atrapado.h"
 using namespace sf;
 
 
@@ -10,7 +12,9 @@ using namespace sf;
 int main()
 {
 	//Crosshair crosshair;
-	Drag drag;
+	//Drag drag;
+	//Splats splat;
+	Atrapado atrapado;
 	return 0;
 }
 

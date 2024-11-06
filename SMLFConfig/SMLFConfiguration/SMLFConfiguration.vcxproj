@@ -132,12 +132,14 @@
   <ItemGroup>
     <ClCompile Include="Crosshair.cpp" />
     <ClCompile Include="Drag.cpp" />
+    <ClCompile Include="Splats.cpp" />
     <ClCompile Include="Unidad4.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Crosshair.h" />
     <ClInclude Include="Drag.h" />
     <ClInclude Include="SMLFConfiguration.h" />
+    <ClInclude Include="Splats.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

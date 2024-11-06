@@ -33,8 +33,8 @@ Drag::Drag()
 
 	_rcircleUpLeft->setPosition(0, 0);
 	_rcircleUpRight->setPosition(window.getSize().x - _rcircleTex.getSize().x, 0); //Para evitar numeros mágicos. Hacer lo mismo en los demás
-	_rcircleDownRight->setPosition(0, 472);
-	_rcircleDownLeft->setPosition(672, 472);
+	_rcircleDownRight->setPosition(0, window.getSize().y - _rcircleTex.getSize().y);
+	_rcircleDownLeft->setPosition(window.getSize().x - _rcircleTex.getSize().x, window.getSize().y - _rcircleTex.getSize().y);
 
 
 	while (window.isOpen())
