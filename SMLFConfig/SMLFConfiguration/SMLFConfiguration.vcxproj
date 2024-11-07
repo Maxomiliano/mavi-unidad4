@@ -130,12 +130,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Atrapado.cpp" />
     <ClCompile Include="Crosshair.cpp" />
     <ClCompile Include="Drag.cpp" />
     <ClCompile Include="Splats.cpp" />
     <ClCompile Include="Unidad4.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Atrapado.h" />
     <ClInclude Include="Crosshair.h" />
     <ClInclude Include="Drag.h" />
     <ClInclude Include="SMLFConfiguration.h" />
