@@ -1,6 +1,5 @@
 #include "Alien.h"
 #include <SFML/Graphics.hpp>
-#include <cstdlib>
 
 Alien::Alien()
 {

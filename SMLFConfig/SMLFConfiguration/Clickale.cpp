@@ -8,8 +8,6 @@ using namespace sf;
 
 Clickale::Clickale() : window(VideoMode(800, 600), "Clickale"), aliensDefeated(0)
 {
-
-
 	crossTex.loadFromFile("crosshair.png");
 	alienTex.loadFromFile("et.png");
 
@@ -63,7 +61,6 @@ void Clickale::Play()
 				break;
 			}
 		}
-
 		window.clear();
 		alien.Draw(window);
 		cross.Draw(window);
