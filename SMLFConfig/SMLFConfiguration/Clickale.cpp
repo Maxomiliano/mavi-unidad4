@@ -1,48 +1,37 @@
 #include "Clickale.h"
+#include "Alien.h"
+#include "Cross.h"
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
 #include <iostream>
 using namespace sf;
 
-Clickale::Clickale()
+Clickale::Clickale() : window(VideoMode(800, 600), "Clickale"), aliensDefeated(0)
+{
+
+
+	crossTex.loadFromFile("crosshair.png");
+	alienTex.loadFromFile("et.png");
+
+	cross.setTexture(crossTex);
+	alien.setTexture(alienTex);
+
+	float widthCross = (float)crossTex.getSize().x;
+	float heightCross = (float)crossTex.getSize().y;
+	float widthAlien = (float)alienTex.getSize().x;
+	float heightAlien = (float)alienTex.getSize().y;
+
+	float scaleX = widthCross / widthAlien;
+	float scaleY = heightCross / heightAlien;
+
+	alien.setScale(scaleX, scaleY);
+	alien.Spawn(window.getSize());
+}
+
+void Clickale::Play()
 {
 	Event evt;
 	Mouse mouse;
-	Texture _crosshairTex;
-	Texture _alienTex;
-	Sprite* _alienSpr = new Sprite();
-	Sprite* _crosshairSpr = new Sprite();
-
-	float scaleX;
-	float scaleY;
-	float heightCross;
-	float widthCross;
-	float heightAlien;
-	float widthAlien;
-	bool isAlienVisible = true;
-
-	_crosshairTex.loadFromFile("crosshair.png");
-	_alienTex.loadFromFile("et.png");
-	_crosshairSpr->setTexture(_crosshairTex);
-	_alienSpr->setTexture(_alienTex);
-	_crosshairSpr->setOrigin(64, 64);
-	_alienSpr->setOrigin(64, 64);
-	_alienSpr->setPosition(400, 300);
-	_crosshairSpr->setPosition(400, 300);
-
-	widthCross = (float)_crosshairTex.getSize().x;
-	heightCross = (float)_crosshairTex.getSize().y;
-	widthAlien = (float)_alienTex.getSize().x;
-	heightAlien = (float)_alienTex.getSize().y;
-	
-	scaleX = widthCross / widthAlien;
-	scaleY = heightCross / heightAlien;
-	_alienSpr->setScale(scaleX, scaleY);
-
-	RenderWindow window(VideoMode(800, 600, 32), "Clickale");
-
-	//Vector2u windowSize = window.getSize();
-
 	while (window.isOpen())
 	{
 		while (window.pollEvent(evt))
@@ -53,22 +42,31 @@ Clickale::Clickale()
 				window.close();
 				break;
 			case sf::Event::MouseMoved:
-				_crosshairSpr->setPosition(evt.mouseMove.x, evt.mouseMove.y);
+				cross.UpdatePosition(Vector2f(evt.mouseMove.x, evt.mouseMove.y));
+				break;
 			case Event::MouseButtonPressed:
-				if (mouse.isButtonPressed(mouse.Left) && isAlienVisible)
+				if (mouse.isButtonPressed(mouse.Left))
 				{
-					if (_alienSpr->getGlobalBounds().contains(evt.mouseButton.x, evt.mouseButton.y))
+					if (alien.IsClicked(Vector2f(evt.mouseButton.x, evt.mouseButton.y)))
 					{
-						isAlienVisible = false;
+						aliensDefeated++;
+					}
+					if (aliensDefeated < maxScore)
+					{
+						alien.Spawn(window.getSize());
+					}
+					else
+					{
+						window.close();
 					}
 				}
 				break;
 			}
 		}
+
 		window.clear();
-		if(isAlienVisible)
-			window.draw(*_alienSpr);
-		window.draw(*_crosshairSpr);
+		alien.Draw(window);
+		cross.Draw(window);
 		window.display();
 	}
 }

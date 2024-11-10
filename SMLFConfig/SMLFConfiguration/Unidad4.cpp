@@ -19,6 +19,7 @@ int main()
 	//Atrapado atrapado;
 	//Adaptacion adaptacion;
 	Clickale clickale;
+	clickale.Play();
 	return 0;
 }
 

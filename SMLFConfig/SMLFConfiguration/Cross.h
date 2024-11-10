@@ -8,6 +8,7 @@ public:
 	Cross();
 	void UpdatePosition(Vector2f position);
 	void Draw(RenderWindow& window);
+	void setTexture(const sf::Texture& texture);
 private:
 	Texture crossTex;
 	Sprite crossSpr;

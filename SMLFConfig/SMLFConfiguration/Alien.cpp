@@ -1,12 +1,11 @@
 #include "Alien.h"
+#include <SFML/Graphics.hpp>
 #include <cstdlib>
 
 Alien::Alien()
 {
-	alienTex.loadFromFile("et.png");
-	alienSpr.setTexture(alienTex);
-	alienSpr.setOrigin(64, 64);
 	isVisible = true;
+	std::srand(static_cast<unsigned int>(std::time(NULL)));
 }
 
 void Alien::Spawn(Vector2u windowSize)
@@ -37,5 +36,13 @@ void Alien::Draw(RenderWindow& window)
 
 bool Alien::IsVisible() const
 {
-	return IsVisible;
+	return isVisible;
+}
+
+void Alien::setTexture(const sf::Texture& texture) {
+	alienSpr.setTexture(texture);
+}
+
+void Alien::setScale(float x, float y) {
+	alienSpr.setScale(x, y);
 }
