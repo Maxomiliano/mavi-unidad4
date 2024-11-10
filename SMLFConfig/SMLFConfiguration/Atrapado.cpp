@@ -11,6 +11,7 @@ Atrapado::Atrapado()
 	Texture _ysquareTex;
 	Texture _rcircleTex;
 	Sprite* _currentSpr = new Sprite();
+
 	bool isSquare = true;
 
 	float scaleX;
@@ -28,10 +29,10 @@ Atrapado::Atrapado()
 	_currentSpr->setTexture(_ysquareTex);
 	_currentSpr->setPosition(500, 500);
 
-	
+
 	widthSquare = (float)_ysquareTex.getSize().x;
 	heightSquare = (float)_ysquareTex.getSize().y;
-	widthCircle =  (float)_rcircleTex.getSize().x;
+	widthCircle = (float)_rcircleTex.getSize().x;
 	heightCircle = (float)_rcircleTex.getSize().y;
 
 	scaleX = widthCircle / widthSquare;
@@ -39,10 +40,12 @@ Atrapado::Atrapado()
 
 	_currentSpr->setScale(scaleX, scaleY);
 
+
 	RenderWindow window(VideoMode(800, 800, 32), "Splats");
 
 	while (window.isOpen())
 	{
+		Vector2u windowSize = window.getSize();
 		while (window.pollEvent(evt))
 		{
 			switch (evt.type)
@@ -51,21 +54,26 @@ Atrapado::Atrapado()
 				window.close();
 				break;
 			case Event::KeyPressed:
+				FloatRect spriteBounds = _currentSpr->getGlobalBounds();
 				if (Keyboard::isKeyPressed(Keyboard::W))
 				{
-					_currentSpr->move(0, -movementPos);
+					if (spriteBounds.top > 0)
+						_currentSpr->move(0, -movementPos);
 				}
 				if (Keyboard::isKeyPressed(Keyboard::A))
 				{
-					_currentSpr->move(-movementPos, 0);
+					if (spriteBounds.left > 0)
+						_currentSpr->move(-movementPos, 0);
 				}
 				if (Keyboard::isKeyPressed(Keyboard::S))
 				{
-					_currentSpr->move(0, movementPos);
+					if (spriteBounds.top + spriteBounds.height < windowSize.y)
+						_currentSpr->move(0, movementPos);
 				}
 				if (Keyboard::isKeyPressed(Keyboard::D))
 				{
-					_currentSpr->move(movementPos, 0);
+					if (spriteBounds.left + spriteBounds.height < windowSize.y)
+						_currentSpr->move(movementPos, 0);
 				}
 				if (Keyboard::isKeyPressed(Keyboard::Space) && isSquare == true)
 				{
@@ -79,6 +87,7 @@ Atrapado::Atrapado()
 					_currentSpr->setScale(scaleX, scaleY);
 					isSquare = true;
 				}
+				spriteBounds = _currentSpr->getGlobalBounds();
 			}
 		}
 		window.clear();
