@@ -29,7 +29,6 @@ Atrapado::Atrapado()
 	_currentSpr->setTexture(_ysquareTex);
 	_currentSpr->setPosition(500, 500);
 
-
 	widthSquare = (float)_ysquareTex.getSize().x;
 	heightSquare = (float)_ysquareTex.getSize().y;
 	widthCircle = (float)_rcircleTex.getSize().x;
@@ -37,11 +36,9 @@ Atrapado::Atrapado()
 
 	scaleX = widthCircle / widthSquare;
 	scaleY = heightCircle / heightSquare;
-
 	_currentSpr->setScale(scaleX, scaleY);
 
-
-	RenderWindow window(VideoMode(800, 800, 32), "Splats");
+	RenderWindow window(VideoMode(800, 800, 32), "Atrapado");
 
 	while (window.isOpen())
 	{
@@ -54,7 +51,9 @@ Atrapado::Atrapado()
 				window.close();
 				break;
 			case Event::KeyPressed:
+
 				FloatRect spriteBounds = _currentSpr->getGlobalBounds();
+
 				if (Keyboard::isKeyPressed(Keyboard::W))
 				{
 					if (spriteBounds.top > 0)
@@ -72,22 +71,26 @@ Atrapado::Atrapado()
 				}
 				if (Keyboard::isKeyPressed(Keyboard::D))
 				{
-					if (spriteBounds.left + spriteBounds.height < windowSize.y)
+					if (spriteBounds.left + spriteBounds.width < windowSize.x)
 						_currentSpr->move(movementPos, 0);
 				}
-				if (Keyboard::isKeyPressed(Keyboard::Space) && isSquare == true)
+
+				if (Keyboard::isKeyPressed(Keyboard::Space))
 				{
-					_currentSpr->setTexture(_rcircleTex);
-					_currentSpr->setScale(1, 1);
-					isSquare = false;
+					if (isSquare)
+					{
+						_currentSpr->setTexture(_rcircleTex);
+						_currentSpr->setScale(1, 1);
+						isSquare = false;
+					}
+					else
+					{
+						_currentSpr->setTexture(_ysquareTex);
+						_currentSpr->setScale(scaleX, scaleY);
+						isSquare = true;
+					}
+					spriteBounds = _currentSpr->getGlobalBounds();
 				}
-				else if (Keyboard::isKeyPressed(Keyboard::Space) && isSquare == false)
-				{
-					_currentSpr->setTexture(_ysquareTex);
-					_currentSpr->setScale(scaleX, scaleY);
-					isSquare = true;
-				}
-				spriteBounds = _currentSpr->getGlobalBounds();
 			}
 		}
 		window.clear();

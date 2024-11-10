@@ -5,6 +5,8 @@
 #include "Drag.h"
 #include "Splats.h"
 #include "Atrapado.h"
+#include "Adaptacion.h"
+#include "Clickale.h"
 using namespace sf;
 
 
@@ -14,7 +16,9 @@ int main()
 	//Crosshair crosshair;
 	//Drag drag;
 	//Splats splat;
-	Atrapado atrapado;
+	//Atrapado atrapado;
+	//Adaptacion adaptacion;
+	Clickale clickale;
 	return 0;
 }
 
