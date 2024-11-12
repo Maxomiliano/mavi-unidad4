@@ -18,7 +18,7 @@ int main()
 	//Splats splat;
 	//Atrapado atrapado;
 	//Adaptacion adaptacion;
-	//Clickale clickale;
+	Clickale clickale;
 	//clickale.Play();
 	return 0;
 }

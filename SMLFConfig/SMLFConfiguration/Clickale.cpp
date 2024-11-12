@@ -24,6 +24,8 @@ Clickale::Clickale() : window(VideoMode(800, 600), "Clickale"), aliensDefeated(0
 
 	alien.setScale(scaleX, scaleY);
 	alien.Spawn(window.getSize());
+
+	Play();
 }
 
 void Clickale::Play()
